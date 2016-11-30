@@ -14,13 +14,30 @@ var isAdding = false;
 var count = 0;
 var amount = 100;
 var renderer = null;
-var stage = new PIXI.Container();
+var stage = null;
 var stats = null;
 var textures = null;
 var counter = null;
+var tags = [];
 
 function onReady()
 {
+    $.getJSON('https://api.github.com/repos/pixijs/pixi.js/releases', function(releases)
+    {
+        for (var i = 0; i < releases.length; i++)
+        {
+            tags.push(releases[i].tag_name);
+        }
+    });
+
+    $.getJSON('https://api.github.com/repos/pixijs/pixi.js/branches', function(branches)
+    {
+        for (var i = 0; i < branches.length; i++)
+        {
+            tags.push(branches[i].name);
+        }
+    });
+
     var $stage = $('#stage');
     maxX = $stage.width();
     maxY = $stage.height();
@@ -31,6 +48,8 @@ function onReady()
     });
 
     amount = (renderer instanceof PIXI.WebGLRenderer) ? 100 : 5;
+
+    stage = new PIXI.Container();
 
     if (amount == 5)
     {
