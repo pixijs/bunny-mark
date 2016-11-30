@@ -1,0 +1,33 @@
+{
+  "name": "bunny-mark",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simulation for testing Pixi.js performance",
+  "scripts": {
+    "test": "npm run build",
+    "lint": "eslint src",
+    "clean": "rimraf deploy/index.js",
+    "prebuild": "npm run lint && npm run clean",
+    "build": "browserify src/index.js -o deploy/index.js",
+    "start": "http-server deploy -o",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixijs/bunny-mark.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pixijs/bunny-mark/issues"
+  },
+  "homepage": "https://github.com/pixijs/bunny-mark#readme",
+  "devDependencies": {
+    "browserify": "^13.1.1",
+    "eslint": "^3.11.1",
+    "gh-pages": "^0.12.0",
+    "http-server": "^0.9.0",
+    "rimraf": "^2.5.4"
+  }
+}
