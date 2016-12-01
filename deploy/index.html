@@ -13,13 +13,39 @@
             integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
             crossorigin="anonymous"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
-        <script src="//d157l7jdn8e5sf.cloudfront.net/dev/pixi.js"></script>
+        <!-- <script src="//d157l7jdn8e5sf.cloudfront.net/dev/pixi.js"></script> -->
 
         <!-- Local dependencies --> 
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-        <div id="frame">
+        <div id="chooser" class="center">
+            <div class="container-fluid">
+                <h1>Bunny Mark</h1>
+                <div class="progress loader">
+                    <div class="progress-bar progress-bar-striped active" style="width:100%"></div>
+                </div>
+                <form>
+                    <div class="form-group row">
+                        <label class="col-sm-3">Start Bunny Amount</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="number" id="startBunnyCount" value="100000">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3">Select Version</label>
+                        <div class="col-sm-9" id="tags">Loading...</div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3">Select Branch</label>
+                        <div class="col-sm-9" id="branches">Loading...</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="frame" class="center hidden">
+            <div class="error center">PIXI is unavailable with this tag or branch.</div>
             <canvas id="stage" width="800" height="600"></canvas>
             <img class="disable" id="logo" src="images/logo_small.png" title="pixi.js" />
             <img class="disable" id="lineup" src="images/lineup.png" />
