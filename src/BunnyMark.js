@@ -3,10 +3,9 @@ var Resources = require('./Resources');
 /**
  * Application call for simulation
  * @class BunnyMark
- * @param {String} frame Selector for the frame element
- * @param {int} [startBunnyCount=0] Initial number of bunnies to start.
+ * @param {String} domElementSelector Selector for the frame element
  */
-var BunnyMark = function(frame, startBunnyCount)
+var BunnyMark = function(domElementSelector)
 {
     /**
      * Collection of currently running bunnies
@@ -18,7 +17,7 @@ var BunnyMark = function(frame, startBunnyCount)
      * Containing frame element
      * @type {JQuery}
      */
-    this.frame = $(frame);
+    this.domElement = $(domElementSelector);
 
     /**
      * Stage bounds
@@ -30,12 +29,6 @@ var BunnyMark = function(frame, startBunnyCount)
         right: 0,
         bottom: 0
     };
-
-    /**
-     * The number of bunnies to start with
-     * @type {int}
-     */
-    this.startBunnyCount = startBunnyCount || 0;
 
     /**
      * `true` to increment the number of bunnies
@@ -91,25 +84,19 @@ var BunnyMark = function(frame, startBunnyCount)
      * @type {JQuery}
      */
     this.counter = null;
-
-    // Handle window resizes
-    $(window).on(
-        'resize orientationchange', 
-        this.resize.bind(this)
-    );
 };
 
 /**
  * To be called when window and PIXI is ready
  * @method ready
  */
-BunnyMark.prototype.ready = function()
+BunnyMark.prototype.ready = function(startBunnyCount)
 {
-    this.frame.removeClass('loading');
+    this.domElement.removeClass('hidden');
 
-    if (typeof PIXI === "undefined")
+    if (typeof PIXI === 'undefined')
     {
-        this.frame.addClass('error');
+        this.domElement.addClass('error');
         throw "PIXI is required to run";
     }
 
@@ -137,7 +124,7 @@ BunnyMark.prototype.ready = function()
     // Create the stats element
     this.stats = new Stats();
     this.stats.domElement.id = "stats";
-    this.frame.append(this.stats.domElement);
+    this.domElement.append(this.stats.domElement);
 
     // Get bunny textures
     this.textures = Resources.map(function(a){
@@ -154,9 +141,9 @@ BunnyMark.prototype.ready = function()
     this.counter = $("#counter");
     this.counter.html(this.count + " BUNNIES");
 
-    if (this.startBunnyCount > 0)
+    if (startBunnyCount > 0)
     {
-        this.addBunnies(this.startBunnyCount);
+        this.addBunnies(startBunnyCount);
     }
 
     var $view = $(view);
@@ -168,6 +155,12 @@ BunnyMark.prototype.ready = function()
     $view.on('mouseup touchend', stopAdding);
     $doc.on('touchstart', startAdding);
     $doc.on('touchend', stopAdding);
+
+    // Handle window resizes
+    $(window).on(
+        'resize orientationchange', 
+        this.resize.bind(this)
+    );
 
     this.resize();
     this.startUpdate();
@@ -191,6 +184,7 @@ BunnyMark.prototype.addBunnies = function(num)
         this.stage.addChild(bunny);
         this.count++;
     }
+    this.counter.html(this.count + " BUNNIES");
 };
 
 /**
@@ -230,8 +224,8 @@ BunnyMark.prototype.startUpdate = function()
  */
 BunnyMark.prototype.resize = function()
 {
-    var width = this.frame.width();
-    var height = this.frame.height();
+    var width = this.domElement.width();
+    var height = this.domElement.height();
     this.bounds.right = width;
     this.bounds.bottom = height;
     this.renderer.resize(width, height);
@@ -267,7 +261,6 @@ BunnyMark.prototype.update = function()
         {
             this.addBunnies(this.amount);
         }
-        this.counter.html(this.count + " BUNNIES");
     }
 
     for (var i = 0; i < this.bunnies.length; i++)

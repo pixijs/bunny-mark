@@ -1,5 +1,9 @@
 var BunnyMark = require('./BunnyMark');
-var app = new BunnyMark('#frame');
+var VersionChooser = require('./VersionChooser');
 
-// On window ready
-$(app.ready.bind(app));
+var app = new BunnyMark('#frame');
+var chooser = new VersionChooser('#chooser');
+chooser.select = app.ready.bind(app);
+
+// Wait for window
+$(chooser.init.bind(chooser));

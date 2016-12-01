@@ -4,6 +4,7 @@ body {
     margin:0;
     font-family: Helvetica, Arial, sans-serif;
     overflow: hidden;
+    color:#fff;
 }
 
 .center {
@@ -22,7 +23,12 @@ body {
     height: 100%;
 }
 
-#frame.loading {
+#chooser {
+	max-width: 800px;
+	width: 100%;
+}
+
+.hidden {
 	display:none;
 }
 
@@ -49,10 +55,25 @@ body {
 	position:absolute;
 	z-index: 1;
 }
-
 #logo {
 	bottom:5px;
 	right:0;
+}
+
+#chooser .btn {
+	margin-bottom:5px;
+	width:90px;
+	display:inline-block;
+	margin-right:5px;
+	overflow: hidden;
+}
+
+#chooser .loader,
+#chooser.loading form {
+	display:none;
+}
+#chooser.loading .loader {
+	display:block;
 }
 
 #lineup {
@@ -74,7 +95,7 @@ body {
 
 #counter {
     background: #ccc;
-	width: 74px;
+	width: 80px;
 	overflow: hidden;
     white-space: nowrap;
 	position: absolute;
