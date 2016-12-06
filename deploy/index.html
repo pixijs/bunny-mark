@@ -20,7 +20,12 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-        <div id="chooser" class="center">
+        <div id="chooser">
+            <div id="template" class="hidden">
+                <div class="col-sm-3 col-xs-4">
+                    <button class="version btn btn-block btn-primary btn-sm"></button>
+                </div>
+            </div>
             <div class="container-fluid">
                 <h1>Bunny Mark</h1>
                 <div class="progress loader">
@@ -33,13 +38,30 @@
                             <input class="form-control" type="number" id="startBunnyCount" value="100000">
                         </div>
                     </div>
+                    <hr>
                     <div class="form-group row">
                         <label class="col-sm-3">Select Version</label>
-                        <div class="col-sm-9" id="tags">Loading...</div>
+                        <div class="col-sm-9">
+                            <div id="tags" class="row">
+                                <div class="col-sm-12">Loading...</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3">Select Branch</label>
-                        <div class="col-sm-9" id="branches">Loading...</div>
+                        <div class="col-sm-9">
+                            <div id="branches" class="row">
+                                <div class="col-sm-12">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3">Select File</label>
+                        <div class="col-sm-9">
+                            <span id="browseFile" class="btn btn-primary btn-block btn-file">
+                                Browse... <input accept=".js" type="file">
+                            </span>
+                        </div>
                     </div>
                 </form>
             </div>

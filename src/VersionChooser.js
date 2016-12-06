@@ -66,6 +66,7 @@ VersionChooser.prototype.getReleases = function(callback)
         {
             _this.tags.push(releases[i].tag_name);
         }
+        _this.tags.reverse();
         callback();
     });
 };
@@ -91,7 +92,38 @@ VersionChooser.prototype.getBranches = function(callback)
 VersionChooser.prototype.init = function()
 {
     var _this = this;
-    
+
+    // Listen for local file upload
+    $('#browseFile :file').change(function() {
+        
+        if (!window.FileReader)
+        {
+            alert('Your browser is not supported');
+            return false;
+        }
+
+        var reader = new FileReader();
+        if (this.files.length)
+        {
+            var textFile = this.files[0];
+            reader.readAsText(textFile);
+            $(reader).on('load', function(e)
+            {
+                var file = e.target.result;
+                if (file && file.length)
+                {
+                    var script = $("<script></script>");
+                    script.html(file);
+                    _this.addScript(script);
+                }
+            });
+        }
+        else
+        {
+            alert('Please upload a file before continuing');
+        }        
+    });
+
     _this.getReleases(function()
     {
         _this.getBranches(function()
@@ -110,24 +142,27 @@ VersionChooser.prototype.displayTags = function()
     var domTags = this.domElement.find('#tags').html('');
     var domBranches = this.domElement.find('#branches').html('');
     var i, button;
+    var template = this.domElement.find('#template').html();
 
     for (i = this.tags.length - 1; i >= 0; i--)
     {
-        button = $('<button></button>');
-        button.addClass('btn btn-primary btn-sm');
-        button.html(this.tags[i]);
+        button = $(template);
+        button.find('.version')
+            .prop('title', this.tags[i])
+            .html(this.tags[i]);
         domTags.append(button);
     }
 
     for (i = this.branches.length - 1; i >= 0; i--)
     {
-        button = $('<button></button>');
-        button.addClass('btn btn-primary btn-sm');
-        button.html(this.branches[i]);
+        button = $(template);
+        button.find('.version')
+            .prop('title', this.branches[i])
+            .html(this.branches[i]);
         domBranches.append(button);
     }
 
-    this.domElement.find('button').click(this.start.bind(this));
+    this.domElement.find('.version').click(this.start.bind(this));
 };
 
 /**
@@ -146,9 +181,21 @@ VersionChooser.prototype.start = function(event)
     var script = $('<script></script>');
     var src = this.cdnTemplate.replace('${tag}', tag);
     script.prop('src', src);
+
+    this.addScript(script);
+};
+
+/**
+ * Start loadin PIXI
+ * @method addScript
+ * @param {JQuery} script The script element
+ */
+VersionChooser.prototype.addScript = function(script)
+{
     script.get(0).onerror = function() {
-        console.log("Script loading error");
+        console.error("Script loading error");
     };
+
     this.domElement.append(script);
     this.domElement.addClass('loading');
 

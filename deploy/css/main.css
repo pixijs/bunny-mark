@@ -3,7 +3,6 @@ body {
     padding:0;
     margin:0;
     font-family: Helvetica, Arial, sans-serif;
-    overflow: hidden;
     color:#fff;
 }
 
@@ -26,6 +25,7 @@ body {
 #chooser {
 	max-width: 800px;
 	width: 100%;
+	margin:0 auto;
 }
 
 .hidden {
@@ -62,9 +62,9 @@ body {
 
 #chooser .btn {
 	margin-bottom:5px;
-	width:90px;
+	/*width:90px;
 	display:inline-block;
-	margin-right:5px;
+	margin-right:5px;*/
 	overflow: hidden;
 }
 
@@ -108,4 +108,24 @@ body {
 	font-family: Helvetica, Arial;
 	font-size: 9px;
 	font-weight: bold;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }
