@@ -56,6 +56,11 @@ var VersionChooser = function(domElementSelector)
     this.initCount = $("#startBunnyCount");
 };
 
+/**
+ * Get the list of releases (versions) from the Github API
+ * @method getReleases
+ * @param {Function} callback when completed
+ */
 VersionChooser.prototype.getReleases = function(callback)
 {
     var _this = this;
@@ -71,6 +76,11 @@ VersionChooser.prototype.getReleases = function(callback)
     });
 };
 
+/**
+ * Get the list of branches of pixijs/pixi.js from the Github API
+ * @method getBranches
+ * @param {Function} callback when completed
+ */
 VersionChooser.prototype.getBranches = function(callback)
 {
     var _this = this;
@@ -91,6 +101,8 @@ VersionChooser.prototype.getBranches = function(callback)
  */
 VersionChooser.prototype.init = function()
 {
+    this.domElement.removeClass('hidden');
+
     var _this = this;
 
     // Listen for local file upload

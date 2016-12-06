@@ -9,7 +9,7 @@
     "clean": "rimraf deploy/index.js",
     "prebuild": "npm run lint && npm run clean",
     "build": "browserify src/index.js -o deploy/index.js",
-    "start": "http-server deploy -o",
+    "start": "http-server deploy -os -c-1",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d deploy"
   },

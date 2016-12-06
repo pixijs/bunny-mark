@@ -1,9 +1,20 @@
 var BunnyMark = require('./BunnyMark');
 var VersionChooser = require('./VersionChooser');
 
-var app = new BunnyMark('#frame');
-var chooser = new VersionChooser('#chooser');
-chooser.select = app.ready.bind(app);
+// Window ready
+$(function()
+{
+    var app = new BunnyMark('#frame');
 
-// Wait for window
-$(chooser.init.bind(chooser));
+    // Check for local pixi.js
+    if (typeof PIXI === 'undefined')
+    {
+        var chooser = new VersionChooser('#chooser');
+        chooser.select = app.ready.bind(app);
+        chooser.init();
+    }
+    else
+    {
+        app.ready();
+    }
+});

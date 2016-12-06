@@ -31,3 +31,15 @@ Open the deploy folder within a browser.
 ```bash
 npm start
 ```
+
+### Local Previewing
+
+If you want to test a local build, simply drop **pixi.js** into the deploy folder. This should be a dist build of **pixi.js**.
+
+Then start running the Preview, if it's not running already:
+
+```bash
+npm start
+```
+
+Lastly, navigate to: http://127.0.0.1:8080/index-local.html to test the local build.

@@ -89,9 +89,15 @@ var BunnyMark = function(domElementSelector)
 /**
  * To be called when window and PIXI is ready
  * @method ready
+ * @param {int} [startBunnyCount=100000] The number of bunnies to start with
  */
 BunnyMark.prototype.ready = function(startBunnyCount)
 {
+    // Default bunnies to 100000
+    if (typeof startBunnyCount === 'undefined') {
+        startBunnyCount = 100000;
+    }
+
     this.domElement.removeClass('hidden');
 
     if (typeof PIXI === 'undefined')
