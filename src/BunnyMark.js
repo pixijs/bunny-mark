@@ -111,10 +111,20 @@ BunnyMark.prototype.ready = function(startBunnyCount)
     this.bounds.right = $stage.width();
     this.bounds.bottom = $stage.height();
 
-    this.renderer = PIXI.autoDetectRenderer(this.bounds.right, this.bounds.bottom, {
+    var options = {
         backgroundColor: 0xFFFFFF,
         view: view
+    };
+
+    $('input[type=checkbox]').each(function() {
+        options[this.value] = this.checked;
     });
+
+    this.renderer = PIXI.autoDetectRenderer(
+        this.bounds.right,
+        this.bounds.bottom,
+        options
+    );
 
     // Add fewer bunnies for the canvas renderer
     if (this.renderer instanceof PIXI.CanvasRenderer)
