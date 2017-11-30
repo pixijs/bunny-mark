@@ -1,9 +1,9 @@
 body {
-    background: #000;
+    background: #272d37;
     padding:0;
     margin:0;
-    font-family: Helvetica, Arial, sans-serif;
-    color:#fff;
+    font-family: "Libre Franklin", sans-serif;
+    color:#cfd4db;
 }
 
 .center {
@@ -28,9 +28,28 @@ body {
 	margin:0 auto;
 }
 
+#chooser #startBunnyCount {
+    background-color: #14171d;
+    color: #fff;
+    border-color: #3d495a;
+}
+
 .hidden {
 	display:none;
 }
+
+label.section {
+    color: #e91e63;
+    font-size:110%;
+    margin-bottom:10px;
+}
+
+h1 {
+    font-weight:bold;
+    color:white;
+    margin-bottom:20px;
+}
+
 
 #frame.error .disable, 
 #frame.error #stage {
@@ -105,9 +124,29 @@ body {
 	left:0;
 	z-index: 2;
 	color:#0ff;
-	font-family: Helvetica, Arial;
+	font-family: "Libre Franklin", Arial;
 	font-size: 9px;
 	font-weight: bold;
+}
+
+.btn-primary {
+    border:0;
+    background: #55a1db;
+    background: -moz-linear-gradient(top, #55a1db 0%, #337ab7 100%);
+    background: -webkit-linear-gradient(top, #55a1db 0%,#337ab7 100%);
+    background: linear-gradient(to bottom, #55a1db 0%,#337ab7 100%);
+}
+.btn-primary:hover {
+    background: #296eaa;
+}
+
+.renderer-options label {
+    font-weight: normal;
+}
+
+hr {
+    border:0;
+    border-bottom: 1px solid #3d495a;
 }
 
 .btn-file {

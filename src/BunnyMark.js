@@ -120,18 +120,28 @@ BunnyMark.prototype.ready = function(startBunnyCount)
         options[this.value] = this.checked;
     });
 
-    this.renderer = PIXI.autoDetectRenderer(
-        this.bounds.right,
-        this.bounds.bottom,
-        options
-    );
+    if (PIXI.autoDetectRenderer) {
+        this.renderer = PIXI.autoDetectRenderer(
+            this.bounds.right,
+            this.bounds.bottom,
+            options
+        );
 
-    // Add fewer bunnies for the canvas renderer
-    if (this.renderer instanceof PIXI.CanvasRenderer)
-    {
-        this.amount = 5;
-        this.renderer.context.mozImageSmoothingEnabled = false;
-        this.renderer.context.webkitImageSmoothingEnabled = false;
+        // Add fewer bunnies for the canvas renderer
+        if (this.renderer instanceof PIXI.CanvasRenderer)
+        {
+            this.amount = 5;
+            this.renderer.context.mozImageSmoothingEnabled = false;
+            this.renderer.context.webkitImageSmoothingEnabled = false;
+        }
+    }
+    // Support for v5
+    else if (PIXI.Renderer) {
+        this.renderer = new PIXI.Renderer(
+            this.bounds.right,
+            this.bounds.bottom,
+            options
+        );
     }
 
     // The current stage

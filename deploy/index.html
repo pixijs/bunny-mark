@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>pixi.js bunnymark</title>
+        <title>PixiJS Bunny Mark</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
@@ -9,13 +9,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <!-- External dependencies -->
         <script
-            src="//code.jquery.com/jquery-3.1.1.js"
+            src="https://code.jquery.com/jquery-3.1.1.js"
             integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
             crossorigin="anonymous"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
 
         <!-- Local dependencies --> 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,700" rel="stylesheet">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
@@ -26,20 +27,20 @@
                 </div>
             </div>
             <div class="container-fluid">
-                <h1>Bunny Mark</h1>
+                <h1>PixiJS Bunny Mark</h1>
                 <div class="progress loader">
                     <div class="progress-bar progress-bar-striped active" style="width:100%"></div>
                 </div>
                 <form>
                     <div class="form-group row">
-                        <label class="col-sm-3">Start Bunny Amount</label>
+                        <label class="section col-sm-3">Start Bunny Amount</label>
                         <div class="col-sm-9">
                             <input class="form-control" type="number" id="startBunnyCount" value="100000">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3">Renderer Options</label>
-                        <div class="col-sm-9">
+                        <label class="section col-sm-3">Renderer Options</label>
+                        <div class="col-sm-9 renderer-options">
                             <div class="col-sm-6">
                                 <label>
                                     <input type="checkbox" name="options[]" value="clearBeforeRender" checked>
@@ -98,7 +99,7 @@
                     </div>
                     <hr>
                     <div class="form-group row">
-                        <label class="col-sm-3">Select Version</label>
+                        <label class="section col-sm-3">Select Version</label>
                         <div class="col-sm-9">
                             <div id="tags" class="row">
                                 <div class="col-sm-12">Loading...</div>
@@ -106,7 +107,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3">Select Branch</label>
+                        <label class="section col-sm-3">Select Branch</label>
                         <div class="col-sm-9">
                             <div id="branches" class="row">
                                 <div class="col-sm-12">Loading...</div>
@@ -114,7 +115,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3">Select File</label>
+                        <label class="section col-sm-3">Select File</label>
                         <div class="col-sm-9">
                             <span id="browseFile" class="btn btn-primary btn-block btn-file">
                                 Browse... <input accept=".js" type="file">
