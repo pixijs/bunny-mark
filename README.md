@@ -1,10 +1,11 @@
 # Bunny Mark
 
-Simulation to smoke-test rendering performance in Pixi.js.
+The purpose of this tool is to crudely sanity-check relative performance changes in PixiJS between
+release versions and branches. It is not designed to show off the performance capabilities of PixiJS and does not reflect typical, real-world rendering conditions. Different devices will have different performance thresholds. 
 
 ## Preview
 
-https://pixijs.github.io/bunny-mark/
+https://pixijs.io/bunny-mark/
 
 ## Rebuilding From Source
 
