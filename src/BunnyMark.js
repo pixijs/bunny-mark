@@ -121,7 +121,7 @@ BunnyMark.prototype.ready = function(startBunnyCount)
     });
     $('select').each(function() {
        options['powerPreference'] = this.value;
-    })
+    });
 
     if (PIXI.autoDetectRenderer) {
         this.renderer = PIXI.autoDetectRenderer(
