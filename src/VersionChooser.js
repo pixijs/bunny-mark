@@ -71,7 +71,7 @@ VersionChooser.prototype.getReleases = function(callback)
         {
             _this.tags.push(releases[i].tag_name);
         }
-        _this.tags.reverse();
+        _this.tags.sort();
         callback();
     });
 };
@@ -91,6 +91,7 @@ VersionChooser.prototype.getBranches = function(callback)
         {
             _this.branches.push(branches[i].name);
         }
+        _this.branches.sort();
         callback();
     });
 };
@@ -151,45 +152,51 @@ VersionChooser.prototype.init = function()
  */
 VersionChooser.prototype.displayTags = function()
 {
-    var domTags = this.domElement.find('#tags').html('');
-    var domBranches = this.domElement.find('#branches').html('');
-    var i, button;
-    var template = this.domElement.find('#template').html();
+    var domTags = this.domElement.find('#tags');
+    var domBranches = this.domElement.find('#branches');
+    var i, option;
 
     for (i = this.tags.length - 1; i >= 0; i--)
     {
-        button = $(template);
-        button.find('.version')
-            .prop('title', this.tags[i])
-            .html(this.tags[i]);
-        domTags.append(button);
+        option = $(document.createElement('option'));
+        option.html(this.tags[i]);
+        domTags.append(option);
     }
 
     for (i = this.branches.length - 1; i >= 0; i--)
     {
-        button = $(template);
-        button.find('.version')
-            .prop('title', this.branches[i])
-            .html(this.branches[i]);
-        domBranches.append(button);
+        option = $(document.createElement('option'));
+        option.html(this.branches[i]);
+        domBranches.append(option);
     }
 
-    this.domElement.find('.version').click(this.start.bind(this));
+    var tagsButton = this.domElement.find('#tagsButton');
+    var branchesButton = this.domElement.find('#branchesButton');
+    var start = this.start.bind(this);
+
+    tagsButton.on('click', function(event) {
+        event.preventDefault();
+        var value = domTags.val();
+        if (value) {
+            start(value);
+        }
+    });
+
+    branchesButton.on('click', function(event) {
+        event.preventDefault();
+        var value = domBranches.val();
+        if (value) {
+            start(value);
+        }
+    });
 };
 
 /**
  * Start loadin PIXI
  * @method start
  */
-VersionChooser.prototype.start = function(event)
+VersionChooser.prototype.start = function(tag)
 {
-    event.preventDefault();
-
-    var tag = event.target.innerHTML;
-    this.domElement.find('button')
-        .prop('disabled', true)
-        .addClass('hidden');
-
     var script = $('<script></script>');
     var src = this.cdnTemplate.replace('${tag}', tag);
     script.prop('src', src);

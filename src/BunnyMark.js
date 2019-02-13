@@ -120,7 +120,7 @@ BunnyMark.prototype.ready = function(startBunnyCount)
         options[this.value] = this.checked;
     });
     $('select').each(function() {
-       options['powerPreference'] = this.value;
+        options.powerPreference = this.value;
     });
 
     if (PIXI.autoDetectRenderer) {
