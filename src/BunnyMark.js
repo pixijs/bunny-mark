@@ -119,6 +119,9 @@ BunnyMark.prototype.ready = function(startBunnyCount)
     $('input[type=checkbox]').each(function() {
         options[this.value] = this.checked;
     });
+    $('select').each(function() {
+       options['powerPreference'] = this.value;
+    });
 
     if (PIXI.autoDetectRenderer) {
         this.renderer = PIXI.autoDetectRenderer(
