@@ -119,7 +119,7 @@ BunnyMark.prototype.ready = function(startBunnyCount)
     $('input[type=checkbox]').each(function() {
         options[this.value] = this.checked;
     });
-    $('select').each(function() {
+    $('select[name=powerPreference]').each(function() {
         options.powerPreference = this.value;
     });
 
