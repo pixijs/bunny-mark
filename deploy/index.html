@@ -14,112 +14,128 @@
             crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.min.js"></script>
 
-        <!-- Local dependencies --> 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Local dependencies -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:400,700" rel="stylesheet">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
         <div id="chooser" class="hidden">
-            <div id="template" class="hidden">
-                <div class="col-sm-3 col-xs-4">
-                    <button class="version btn btn-block btn-primary btn-sm"></button>
-                </div>
-            </div>
             <div class="container-fluid">
-                <h1>PixiJS Bunny Mark</h1>
-                <div class="progress loader">
-                    <div class="progress-bar progress-bar-striped active" style="width:100%"></div>
+                <h1 class="mt-4"><img src="https://pixijs.download/pixijs-text.svg" width="90" class="mr-2 align-baseline" />Bunny Mark</h1>
+                <p class="text-muted mb-4">
+                    The purpose of this tool is to crudely sanity-check relative performance changes in PixiJS between
+                    release versions and branches. It is not designed to show off the performance capabilities of PixiJS and does not reflect typical, real-world rendering conditions.
+                    Different devices will have different performance thresholds. Adjusting the <em>Start Bunny Amount</em>
+                    will improve or decrease performance.
+                </p>
+                <div class="progress" id="loader">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated w-100">&nbsp;</div>
                 </div>
                 <form>
-                    <div class="form-group row">
+                    <div class="form-row mb-3">
                         <label class="section col-sm-3">Start Bunny Amount</label>
                         <div class="col-sm-9">
-                            <input class="form-control" type="number" id="startBunnyCount" value="100000">
+                            <input class="form-control border-0" type="number" id="startBunnyCount" value="100000">
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <hr>
+                    <div class="form-row mb-3">
                         <label class="section col-sm-3">Renderer Options</label>
-                        <div class="col-sm-9 renderer-options">
-                            <div class="col-sm-6">
-                                <label>
-                                    <input type="checkbox" name="options[]" value="clearBeforeRender" checked>
-                                    clearBeforeRender
-                                </label>
+                        <div class="col-sm-9 renderer-options d-flex flex-wrap">
+                            <div class="w-50 mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input class="custom-control-input" type="checkbox" name="options[]" value="clearBeforeRender" checked id="clearBeforeRender">
+                                    <label class="custom-control-label" for="clearBeforeRender">clearBeforeRender</label>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label>
-                                    <input type="checkbox" name="options[]" value="transparent">
-                                    transparent
-                                </label>
+                            <div class="w-50 mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input class="custom-control-input" type="checkbox" name="options[]" value="transparent" id="transparent">
+                                    <label class="custom-control-label" for="transparent">transparent</label>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label>
-                                    <input type="checkbox" name="options[]" value="antialias">
-                                    antialias
-                                </label>
+                            <div class="w-50 mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input class="custom-control-input" type="checkbox" name="options[]" value="antialias" id="antialias">
+                                    <label class="custom-control-label" for="antialias">antialias</label>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label>
-                                    <input type="checkbox" name="options[]" value="preserveDrawingBuffer">
-                                    preserveDrawingBuffer
-                                </label>
+                            <div class="w-50 mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input class="custom-control-input" type="checkbox" name="options[]" value="preserveDrawingBuffer" id="preserveDrawingBuffer">
+                                    <label class="custom-control-label" for="preserveDrawingBuffer">preserveDrawingBuffer</label>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label>
-                                    <input type="checkbox" name="options[]" value="forceCanvas">
-                                    forceCanvas
-                                </label>
+                            <div class="w-50 mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input class="custom-control-input" type="checkbox" name="options[]" value="forceCanvas" id="forceCanvas">
+                                    <label class="custom-control-label" for="forceCanvas">forceCanvas</label>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label>
-                                    <input type="checkbox" name="options[]" value="roundPixels">
-                                    roundPixels
-                                </label>
+                            <div class="w-50 mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input class="custom-control-input" type="checkbox" name="options[]" value="roundPixels" id="roundPixels">
+                                    <label class="custom-control-label" for="roundPixels">roundPixels</label>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label>
-                                    <input type="checkbox" name="options[]" value="legacy">
-                                    legacy
-                                </label>
+                            <div class="w-50 mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input class="custom-control-input" type="checkbox" name="options[]" value="legacy" id="legacy">
+                                    <label class="custom-control-label" for="legacy">legacy</label>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label>
-                                    <input type="checkbox" name="options[]" value="forceFXAA">
-                                    forceFXAA
-                                </label>
+                            <div class="w-50 mb-1">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input class="custom-control-input" type="checkbox" name="options[]" value="forceFXAA" id="forceFXAA">
+                                    <label class="custom-control-label" for="forceFXAA">forceFXAA</label>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-			      <label>
-				powerPreference
-				<select name="powerPreference">
-                                  <option value="default">default</option>
-                                  <option value="high-performance">high-performance</option>
-                                  <option value="low-power">low-power</option>
-				</select>
-                              </label>
+                            <div class="w-100 mt-2">
+                                <div class="input-group input-group-sm border-0">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text bg-secondary text-light border-0 px-3">
+                                            <small>powerPreference</small>
+                                        </label>
+                                    </div>
+                                    <select class="custom-select custom-select-sm border-0" name="powerPreference">
+                                        <option value="default" selected>default</option>
+                                        <option value="high-performance">high-performance</option>
+                                        <option value="low-power">low-power</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <hr>
-                    <div class="form-group row">
-                        <label class="section col-sm-3">Select Version</label>
+                    <div class="form-row mb-3">
+                        <label class="section col-sm-3">Use Version</label>
                         <div class="col-sm-9">
-                            <div id="tags" class="row">
-                                <div class="col-sm-12">Loading...</div>
+                            <div class="input-group">
+                                <select id="tags" class="custom-select border-0">
+                                    <option value="">Select Tag...</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary mb-0 px-4" id="tagsButton">Go</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="section col-sm-3">Select Branch</label>
+                    <div class="form-row mb-3">
+                        <label class="section col-sm-3">Use Branch</label>
                         <div class="col-sm-9">
-                            <div id="branches" class="row">
-                                <div class="col-sm-12">Loading...</div>
+                            <div class="input-group">
+                                <select id="branches" class="custom-select border-0">
+                                    <option value="">Select Branch...</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary mb-0 px-4" id="branchesButton">Go</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="section col-sm-3">Select File</label>
+                    <div class="form-row mb-3">
+                        <label class="section col-sm-3">Use Local File</label>
                         <div class="col-sm-9">
                             <span id="browseFile" class="btn btn-primary btn-block btn-file">
                                 Browse... <input accept=".js" type="file">

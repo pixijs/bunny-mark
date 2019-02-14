@@ -120,7 +120,7 @@ BunnyMark.prototype.ready = function(startBunnyCount)
         options[this.value] = this.checked;
     });
     $('select').each(function() {
-       options['powerPreference'] = this.value;
+        options.powerPreference = this.value;
     });
 
     if (PIXI.autoDetectRenderer) {
@@ -162,7 +162,7 @@ BunnyMark.prototype.ready = function(startBunnyCount)
 
     var gl = this.renderer.gl;
     this.textures.length = Math.min(
-        gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS), 
+        gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS),
         this.textures.length
     );
 
@@ -187,7 +187,7 @@ BunnyMark.prototype.ready = function(startBunnyCount)
 
     // Handle window resizes
     $(window).on(
-        'resize orientationchange', 
+        'resize orientationchange',
         this.resize.bind(this)
     );
 
