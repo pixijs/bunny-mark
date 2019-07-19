@@ -44,10 +44,16 @@ var VersionChooser = function(domElementSelector)
     this.timeout = null;
 
     /**
-     * Path for loading PIXI from the CDN
+     * Path for loading PIXI from the CDN, v5+
      * @type {String}
      */
-    this.cdnTemplate = '//d157l7jdn8e5sf.cloudfront.net/${tag}/pixi.js';
+    this.cdnTemplate = '//pixijs.download/${tag}/pixi-legacy.min.js';
+
+    /**
+     * Path for loading PIXI from the CDN, v4 and below
+     * @type {String}
+     */
+    this.cdnTemplate4 = '//pixijs.download/${tag}/pixi.min.js';
 
     /**
      * The input for bunny count
@@ -198,7 +204,8 @@ VersionChooser.prototype.displayTags = function()
 VersionChooser.prototype.start = function(tag)
 {
     var script = $('<script></script>');
-    var src = this.cdnTemplate.replace('${tag}', tag);
+    var template = tag.indexOf('v4') === 0 ? this.cdnTemplate4 : this.cdnTemplate;
+    var src = template.replace('${tag}', tag);
     script.prop('src', src);
 
     this.addScript(script);

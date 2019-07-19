@@ -123,28 +123,26 @@ BunnyMark.prototype.ready = function(startBunnyCount)
         options.powerPreference = this.value;
     });
 
-    if (PIXI.autoDetectRenderer) {
-        this.renderer = PIXI.autoDetectRenderer(
-            this.bounds.right,
-            this.bounds.bottom,
-            options
-        );
+    Object.assign(options, {
+        width: this.bounds.right,
+        height: this.bounds.bottom,
+    });
 
-        // Add fewer bunnies for the canvas renderer
-        if (this.renderer instanceof PIXI.CanvasRenderer)
-        {
-            this.amount = 5;
-            this.renderer.context.mozImageSmoothingEnabled = false;
-            this.renderer.context.webkitImageSmoothingEnabled = false;
-        }
+    try {
+        this.renderer = PIXI.autoDetectRenderer(options);
     }
-    // Support for v5
-    else if (PIXI.Renderer) {
-        this.renderer = new PIXI.Renderer(
-            this.bounds.right,
-            this.bounds.bottom,
-            options
-        );
+    catch(err)
+    {
+        alert(err.message);
+        return;
+    }
+
+    // Add fewer bunnies for the canvas renderer
+    if (PIXI.CanvasRenderer && this.renderer instanceof PIXI.CanvasRenderer)
+    {
+        this.amount = 5;
+        this.renderer.context.mozImageSmoothingEnabled = false;
+        this.renderer.context.webkitImageSmoothingEnabled = false;
     }
 
     // The current stage
@@ -157,14 +155,17 @@ BunnyMark.prototype.ready = function(startBunnyCount)
 
     // Get bunny textures
     this.textures = Resources.map(function(a){
-        return PIXI.Texture.fromImage(a, null, 1);
+        return PIXI.Texture.from(a);
     });
 
-    var gl = this.renderer.gl;
-    this.textures.length = Math.min(
-        gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS),
-        this.textures.length
-    );
+    if (this.renderer.gl)
+    {
+        var gl = this.renderer.gl;
+        this.textures.length = Math.min(
+            gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS),
+            this.textures.length
+        );
+    }
 
     // Create the sounder
     this.counter = $("#counter");
