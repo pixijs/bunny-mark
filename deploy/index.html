@@ -109,37 +109,31 @@
                     </div>
                     <hr>
                     <div class="form-row mb-3">
-                        <label class="section col-sm-3">Use Version</label>
+                        <label class="section col-sm-3">Version / Branch</label>
                         <div class="col-sm-9">
                             <div class="input-group">
-                                <select id="tags" class="custom-select border-0">
-                                    <option value="">Select Tag...</option>
-                                </select>
+                                <input id="branch" value="dev" class="form-control border-0" />
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary mb-0 px-4" id="tagsButton">Go</button>
+                                    <button class="btn btn-primary mb-0 px-4" id="goButton">Go</button>
                                 </div>
                             </div>
+                            <p class="text-muted mt-3 mb-2 small">
+                                The name of a <a href="https://github.com/pixijs/pixi.js/branches" class="text-white">GitHub branch</a> (e.g., "dev")
+                                or <a href="https://github.com/pixijs/pixi.js/releases" class="text-white">GitHub release</a> (e.g., "v5.2.0")
+                            </p>
                         </div>
                     </div>
+                    <hr>
                     <div class="form-row mb-3">
-                        <label class="section col-sm-3">Use Branch</label>
-                        <div class="col-sm-9">
-                            <div class="input-group">
-                                <select id="branches" class="custom-select border-0">
-                                    <option value="">Select Branch...</option>
-                                </select>
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary mb-0 px-4" id="branchesButton">Go</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row mb-3">
-                        <label class="section col-sm-3">Use Local File</label>
+                        <label class="section col-sm-3">Local Build</label>
                         <div class="col-sm-9">
                             <span id="browseFile" class="btn btn-primary btn-block btn-file">
                                 Browse... <input accept=".js" type="file">
                             </span>
+                            <p class="text-muted mt-3 mb-2 small">
+                                For builds generated locally (e.g., <code>npm run build</code>) you
+                                can upload the built distribution JavaScript file here.
+                            </p>
                         </div>
                     </div>
                 </form>

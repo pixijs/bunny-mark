@@ -1,5 +1,3 @@
-var GITHUB_TOKEN = 'a3cd5bd2660280b5e8bac7606a0f11764428da1d';
-
 /**
  * Select the version of pixi.js to test
  * @class VersionChooser
@@ -12,18 +10,6 @@ var VersionChooser = function(domElementSelector)
      * @type {JQuery}
      */
     this.domElement = $(domElementSelector);
-
-    /**
-     * Collection of tag options
-     * @type {Array<String>}
-     */
-    this.tags = [];
-
-    /**
-     * Collection of branch options
-     * @type {Array<String>}
-     */
-    this.branches = [];
 
     /**
      * Callback funtion when complete
@@ -63,51 +49,11 @@ var VersionChooser = function(domElementSelector)
 };
 
 /**
- * Get the list of releases (versions) from the Github API
- * @method getReleases
- * @param {Function} callback when completed
- */
-VersionChooser.prototype.getReleases = function(callback)
-{
-    var _this = this;
-    var api = 'https://api.github.com/repos/pixijs/pixi.js/releases';
-    $.getJSON(api, { access_token: GITHUB_TOKEN }, function(releases)
-    {
-        for (var i = 0; i < releases.length; i++)
-        {
-            _this.tags.push(releases[i].tag_name);
-        }
-        _this.tags.sort();
-        callback();
-    });
-};
-
-/**
- * Get the list of branches of pixijs/pixi.js from the Github API
- * @method getBranches
- * @param {Function} callback when completed
- */
-VersionChooser.prototype.getBranches = function(callback)
-{
-    var _this = this;
-    var api = 'https://api.github.com/repos/pixijs/pixi.js/branches';
-    $.getJSON(api, { access_token: GITHUB_TOKEN }, function(branches)
-    {
-        for (var i = 0; i < branches.length; i++)
-        {
-            _this.branches.push(branches[i].name);
-        }
-        _this.branches.sort();
-        callback();
-    });
-};
-
-/**
  * Start setup
  * @method init
  */
 VersionChooser.prototype.init = function()
-{
+{    
     this.domElement.removeClass('hidden');
 
     var _this = this;
@@ -143,54 +89,13 @@ VersionChooser.prototype.init = function()
         }        
     });
 
-    _this.getReleases(function()
-    {
-        _this.getBranches(function()
-        {
-            _this.displayTags();
-        })
-    });
-};
-
-/**
- * Display the tag options
- * @method displayTags
- */
-VersionChooser.prototype.displayTags = function()
-{
-    var domTags = this.domElement.find('#tags');
-    var domBranches = this.domElement.find('#branches');
-    var i, option;
-
-    for (i = this.tags.length - 1; i >= 0; i--)
-    {
-        option = $(document.createElement('option'));
-        option.html(this.tags[i]);
-        domTags.append(option);
-    }
-
-    for (i = this.branches.length - 1; i >= 0; i--)
-    {
-        option = $(document.createElement('option'));
-        option.html(this.branches[i]);
-        domBranches.append(option);
-    }
-
-    var tagsButton = this.domElement.find('#tagsButton');
-    var branchesButton = this.domElement.find('#branchesButton');
+    var goButton = this.domElement.find('#goButton');
+    var branch = this.domElement.find('#branch');
     var start = this.start.bind(this);
 
-    tagsButton.on('click', function(event) {
+    goButton.on('click', function(event) {
         event.preventDefault();
-        var value = domTags.val();
-        if (value) {
-            start(value);
-        }
-    });
-
-    branchesButton.on('click', function(event) {
-        event.preventDefault();
-        var value = domBranches.val();
+        var value = branch.val();
         if (value) {
             start(value);
         }
