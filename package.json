@@ -11,7 +11,7 @@
     "build": "parcel build --public-url .",
     "start": "parcel serve --open",
     "predeploy": "run-s build",
-    "deploy": "gh-pages -d deploy -f"
+    "deploy": "gh-pages -d dist -f"
   },
   "repository": {
     "type": "git",
