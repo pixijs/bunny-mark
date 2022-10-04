@@ -1,20 +1,16 @@
-var BunnyMark = require('./BunnyMark');
-var VersionChooser = require('./VersionChooser');
+import BunnyMark from './BunnyMark';
+import VersionChooser from './VersionChooser';
 
-// Window ready
-$(function()
+const app = new BunnyMark('#frame');
+
+if (typeof PIXI === 'undefined')
 {
-    var app = new BunnyMark('#frame');
+    const chooser = new VersionChooser('#chooser');
 
-    // Check for local pixi.js
-    if (typeof PIXI === 'undefined')
-    {
-        var chooser = new VersionChooser('#chooser');
-        chooser.select = app.ready.bind(app);
-        chooser.init();
-    }
-    else
-    {
-        app.ready();
-    }
-});
+    chooser.select = () => app.ready();
+    chooser.init();
+}
+else
+{
+    app.ready();
+}

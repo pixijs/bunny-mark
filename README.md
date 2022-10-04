@@ -42,5 +42,3 @@ Then start running the Preview, if it's not running already:
 ```bash
 npm start
 ```
-
-Lastly, navigate to: http://127.0.0.1:8080/index-local.html to test the local build.
