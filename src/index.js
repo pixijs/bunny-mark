@@ -7,7 +7,7 @@ if (typeof PIXI === 'undefined')
 {
     const chooser = new VersionChooser('#chooser');
 
-    chooser.select = () => app.ready();
+    chooser.select = (startBunnyCount) => app.ready(startBunnyCount);
     chooser.init();
 }
 else
